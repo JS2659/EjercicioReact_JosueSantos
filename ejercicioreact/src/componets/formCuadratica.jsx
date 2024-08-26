@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Swal from 'sweetalert2'
 
 
 function Cuadatrica() {
@@ -17,6 +17,7 @@ function Cuadatrica() {
                 <div className="col-lg-8 col-sm-12 mx-auto">
                     <div className="card mb-5">
                         <div className="card-body">
+                        <h5 className="card-title">Calculadora de Formula Cuadratica</h5>
                         <h5 className="card-title">Ingrese los numeros A, B y C</h5>
                             <div className="row">
                                 <div className="col-lg-4 col-sm-12">
@@ -61,7 +62,7 @@ function Cuadatrica() {
                     </div>
                     <div className="row ">
                         <div className="col-lg-6 col-sm-12 d-grid mx-auto">
-                            <button type="button" className="btn btn-success" onClick={() => setRespuestaMas(calcular(A,B))}>Calcular</button>
+                            <button type="button" className="btn btn-success" onClick={e => calcular()}>Calcular</button>
                         </div>
                     </div> 
                 </div>                      
@@ -71,8 +72,21 @@ function Cuadatrica() {
         </div>
     );
 
-    function calcular(NumeroA, NumeroB){
-        return NumeroA + NumeroB;
+    function calcular(){
+        let radicando = 0;
+        let xpositvo = 0;
+        let xnegativo = 0;
+        radicando = (B*B) - (4*A*C);
+        if (radicando < 0){
+            Swal.fire("Radicando negativo no es posible aplicar formula cuadratica");
+        }else{
+            xpositvo = ((-1*B)+Math.sqrt(radicando))/(2*A);
+            xnegativo = ((-1*B)-Math.sqrt(radicando))/(2*A);
+            setRespuestaMas(xpositvo);
+            setRespuestaMenos(xnegativo);
+        }
+        
+        
     }
 }
 
